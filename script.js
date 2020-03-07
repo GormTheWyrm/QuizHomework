@@ -58,14 +58,14 @@ function countdown() {
     console.log(timeLeft);
     //set timerspan
     // timerSpan.textContent = timeleft;
-    timerSpan.setAttribute("textContent", timeLeft);
+    timerSpan.textContent = timeLeft.toString();
+    // timerSpan.setAttribute("textContent", timeLeft);
 
-    if ((timeLeft < 1) || (isWin === true)) 
-    {
+    if ((timeLeft < 1) || (isWin === true)) {
         clearInterval(interval);
     }
 
-    
+
 }
 
 function startTimer() {
@@ -119,5 +119,7 @@ restartButton.addEventListener("click", function () {
 })
 
 
-/* bonus ideas; add text during transitins suc has "good luck" when start quix is presses... */
+/* bonus ideas; add text during transitions such as "good luck" when start quiz is presses... 
+    make timer turn red at 10 seconds
+*/
 //
