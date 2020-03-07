@@ -1,11 +1,45 @@
-#quiz{
-display: none;
-
-}
 #welcome{
-    display: relative;
+    /* display: relative; */
     margin-left: auto;
     margin-right: auto;
+    /* if bootstrap is not working, I might have to add a width */
+    width: 600px;
+    margin-top:25vh;
+    /* display: none; */
+}
 
+#quiz{
+
+   /* display: relative; */
+   margin-left: auto;
+   margin-right: auto;
+   /* if bootstrap is not working, I might have to add a width */
+   width: 600px;
+   margin-top:25vh;
+   /* position: absolute; */
+   /* display: none; */
+}
+
+#score-div{
+    /* display: relative; */
+    margin-left: auto;
+    margin-right: auto;
+    /* if bootstrap is not working, I might have to add a width */
+    width: 600px;
+    margin-top:25vh;
+    /* position: absolute; */
+}
+
+#final{
+    /* display: relative; */
+    margin-left: auto;
+    margin-right: auto;
+    /* if bootstrap is not working, I might have to add a width */
+    width: 600px;
+    margin-top:25vh;
+    /* position: absolute; */
 }
 /* need to center elements... */
+
+
+/* need to figure out why containers do not limit size as they are supposed to... */

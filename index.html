@@ -15,22 +15,52 @@
 <body>
     <!--  -->
     <div class="container-lg">
-        <div id="welcome">
+        <div id="welcome" class="container-md">
             <h1>Coding Quiz</h1>
             <p>Welcome to my Javascript Coding Quiz</p>
-            <button type="button" class="btn btn-info start-button">Start Quiz</button>
+            <button id="start-button" type="button" class="btn btn-info">Start Quiz</button>
         </div>
 
-        <div id="quiz">
+        <div id="quiz" class="container-md">
             <h1>Test Question 1</h1>
-          <p id="question"></p>>
-          <p id="option1"></p>
-          <p id="option2"></p>
-          <p id="option3"></p>
-          <p id="option4"></p>
-          <p id="option5"></p>
-        </div> 
-        
+            <h3> Time Left <span id="timer-span"></span></h3>
+            <p id="option1" class="question"></p>
+            <p id="option2" class="question"></p>
+            <p id="option3" class="question"></p>
+            <p id="option4" class="question"></p>
+
+        </div>
+
+        <div id="score-div" class="contianer-md">
+            <!-- will display score -->
+            <h1>Congratulations!</h1>
+            <span>You scored</span>
+            <span id="score-span"></span>
+ 
+
+        </div>
+
+        <div id="final" class="contianer-md">
+            <!-- will display score -->
+            <h1>Leaderboards </h1>
+            <div class="row">
+                <div class="col-4">
+                    <span>You scored</span>
+                    <span id="score-span"></span>
+                    <br>
+                </div>
+                <div class="col-8">
+                    <span>High Scores</span>
+                    <!-- <span id="leaderboard1"></span> -->
+                    <!-- <span id="leaderboard2"></span> -->
+                    <!-- <span id="leaderboard3"></span> -->
+                    <br>
+                </div>
+            </div>
+            <button id="restart-button" type="button" class="btn btn-info">Retry Quiz</button>
+
+        </div>
+
     </div>
 
 
