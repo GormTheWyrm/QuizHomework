@@ -54,12 +54,9 @@ var score = 0;
 //60 seconds to finish
 //timeLeft goes down on wrong answers
 
-//should optimize these variables- I dont need all these global variables...probably
-
-
 function startTimer() {
     //sets timer and hides all but quiz div
-    timeLeft = 12;
+    timeLeft = 60;
     isWin = false;
     welcomeDiv.setAttribute("style", "display:none;");
     quizDiv.setAttribute("style", "display:block;");
@@ -67,10 +64,9 @@ function startTimer() {
     finalDiv.setAttribute("style", "display:none;");
     interval = setInterval(countdown, 1000);
 
-    // *****************set time to 12 for testing!
+    
 }
 function countdown() {
-    // console.log("testcountdown");
     timeLeft--;
     console.log(timeLeft);
     //set timerspan
@@ -102,6 +98,8 @@ function loadLeaderboard() {
     // localStorage.setItem("score", myScore);
     //this works!
    
+    //can I make this show an array of scores and names?
+    //perhaps if I make them object pairs?
   
    
 
