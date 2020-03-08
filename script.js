@@ -88,10 +88,11 @@ function startTimer() {
 
 // function takeQuiz() {
 //     var isCorrect = false;
-//     for (i = 0; i < questions.question.length; i++) {
+//     for (i = 0; i < questions.question.length;) {
 //         //move up when correct answer clicked...
 //         function success() {
 //             isCorrect = true;
+//             i++;
 //         }
 //         function failure() {
 //             //should reduce timer
@@ -104,15 +105,16 @@ function startTimer() {
 //             answer3.textContent = questions.answer3[i];
 //             answer4.textContent = questions.correctAnswer[i];
 //             //eventlistener to make this true when clicked!
+//             answer4.addEventListener("click", success);
 //         }
 //         else {
 //             quest.textContent = questions.question[i];
 //             answer1.textContent = questions.answer1[i];
+//             answer4.textContent = questions.answer2[i];
 //             answer3.textContent = questions.answer3[i];
-//             answer4.textContent = questions.correctAnswer[i];
-//             answer2.textContent = questions.answer2[i];
+//             answer2.textContent = questions.correctAnswer[i];
 //             //eventlistener to make this true when clicked!
-//             answer4.addEventListener("click", success());
+//             answer4.addEventListener("click", success);
 
 //         }
 
@@ -120,8 +122,8 @@ function startTimer() {
 //         //need to stop this from advancing until question is clicked...
 //     }
 // }
-//make "ready"
-//move this into start button events!
+// make "ready"
+// move this into start button events!
 
 
 // function takeQuiz() {
@@ -148,31 +150,45 @@ function startTimer() {
 
 
 function takeQuiz() {
+    var i = 0;
     function success() {
-        isCorrect = true;
+        // isCorrect = true;
         i++;
         console.log("suceed");
         event.stopPropagation();
+        //I need this to call the next part of the function!
+        if (i < questions.question.length) { }
+        doQuestion();
     }
+
     function failure() {
         //should reduce timer
         timeLeft = timeLeft - 30;
-        isCorrect = false;
+        // isCorrect = false;
         console.log("fail");
+        //make it say something so user does not hit again!
+        //or at least highlight in red...
         event.stopPropagation();
     }
-    //for loop is not working so we are skipping it...
-    var i = 0;
-    quest.textContent = questions.question[i];
-    answer1.textContent = questions.answer1[i];
-    answer2.textContent = questions.answer2[i];
-    answer3.textContent = questions.answer3[i];
-    console.log("write questions to span");
-    answer4.textContent = questions.correctAnswer[i];
-    answer4.addEventListener("click", success);
-    // answer3.addEventListener("click", failure());
-    // answer2.addEventListener("click", failure());
-    // answer1.addEventListener("click", failure());
+    // for loop is not working so we are skipping it...
+    function doQuestion() {
+        quest.textContent = questions.question[i];
+        answer1.textContent = questions.answer1[i];
+        answer2.textContent = questions.answer2[i];
+        answer3.textContent = questions.answer3[i];
+        console.log("write questions to span");
+        answer4.textContent = questions.correctAnswer[i];
+        answer4.addEventListener("click", success);
+        answer3.addEventListener("click", failure);
+        answer2.addEventListener("click", failure);
+        answer1.addEventListener("click", failure);
+        //currently the correct answer is in same place
+    }
+    //takeQuiz actual orders;
+    doQuestion();
+
+    //* ** */
+    //if?
 
 }
 //* ******************************************** */
