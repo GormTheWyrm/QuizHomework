@@ -29,3 +29,8 @@ THEN the game is over
 WHEN the game is over
 THEN I can save my initials and score
 ```
+
+
+desired optimizations;
+1.make leaderboards remember top 10 users
+2.randomize question order

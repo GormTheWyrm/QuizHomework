@@ -56,7 +56,9 @@ var score = 0;
 
 function startTimer() {
     //sets timer and hides all but quiz div
-    timeLeft = 60;
+    // timeLeft = 60;
+    timeLeft = 12;
+    //   *****************************
     isWin = false;
     welcomeDiv.setAttribute("style", "display:none;");
     quizDiv.setAttribute("style", "display:block;");
@@ -73,7 +75,10 @@ function countdown() {
     // timerSpan.textContent = timeleft;
     timerSpan.textContent = timeLeft.toString();
     // timerSpan.setAttribute("textContent", timeLeft);
-
+    if (timeLeft < 10){
+        timerSpan.setAttribute("style", "color:red")
+        // element.setAttribute(“data-state”, “animate”);
+    }
     if ((timeLeft < 1) || (isWin === true)) {
         clearInterval(interval);
     }
