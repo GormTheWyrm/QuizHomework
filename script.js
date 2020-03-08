@@ -18,11 +18,12 @@
 
 
 var questions = {
-    question: ["test question", "q2", "q3", "q4", "q5"],
-    answer1: ["red", "q2", "q3", "q4", "q5"],
-    answer2: ["yellow", "q2", "q3", "q4", "q5"],
-    answer3: ["blue", "q2", "q3", "q4", "q5"],
-    correctAnswer: ["green", "q2", "q3", "q4", "q5"]
+    question: ["What does the greater than sign look like?", "Which of the following is a valid value for a boolean variable?", 
+    "A prompt returns what sort of variable?", "What is an if-else statement is called?", "What is the value of myArray [3] if myArray = [1, 2, 4, 8, 16, 32]"],
+    answer1: ["+", "integers", "integer", "a party", "3"],
+    answer2: ["/", "17", "boolean", "a loop", "4"],
+    answer3: ["<", "The Muffin Man", "number", "an object", "6"],
+    correctAnswer: [">", "false", "string", "a conditional", "8"]
 };
 /*define html elements; welcome, quiz, score-div, final, option1-4, start-button, restart-button */
 var welcomeDiv = document.getElementById("welcome");
@@ -42,6 +43,7 @@ var timeSpan = document.getElementById("time-span");
 var initials = document.getElementById("initials");
 var isCorrect = false;  //should be a local variable...fix later
 var locationSpan = document.getElementById("location")  //tells which question
+var addButton = document.getElementById("initial-button");   //button that adds username
 
 
 var interval;
@@ -80,7 +82,14 @@ function countdown() {
 
 }
 
+function loadLeaderboard(){
+    welcomeDiv.setAttribute("style", "display:none;");
+    quizDiv.setAttribute("style", "display:none;");
+    scoreDiv.setAttribute("style", "display:none;");
+    finalDiv.setAttribute("style", "display:block;");
+}
 
+// JSON.stringify(“nameOfObject”,  object));
 
 function seeScore() {
     //transitions to score screen
@@ -97,7 +106,9 @@ function seeScore() {
     }
     timeSpan.textContent = timeLeft;
     scoreSpan.textContent = score;
+    addButton.addEventListener("submit", loadLeaderboard);
     //move to leaderboard once initials entered
+    loadLeaderboard();
 }
 
 
