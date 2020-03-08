@@ -32,10 +32,14 @@ var answer1 = document.getElementById("option1");
 var answer2 = document.getElementById("option2");
 var answer3 = document.getElementById("option3");
 var answer4 = document.getElementById("option4");
+var quest = document.getElementById("quest");
 var startButton = document.getElementById("start-button");
 var restartButton = document.getElementById("restart-button");
 var timerSpan = document.getElementById("timer-span");
 var scoreSpan = document.getElementById("score-span");
+var initials = document.getElementById("initials");
+var isCorrect = false;  //should be a local variable...fix later
+
 
 var interval;
 var isWin = false;
@@ -74,52 +78,141 @@ function startTimer() {
 
 
 }
-// setTimer() should
-//set timeLeft and isWin
-//countdown from 120
-//change timer-span
 
 
+//need to pull up quiz components (before starting timer)
+//
+//need to figure out transitions...
+//xxx = questions.question
+//xxx.textContent= questions.option1
+
+// function takeQuiz() {
+//     var isCorrect = false;
+//     for (i = 0; i < questions.question.length; i++) {
+//         //move up when correct answer clicked...
+//         function success() {
+//             isCorrect = true;
+//         }
+//         function failure() {
+//             //should reduce timer
+//             timeLeft = timeLeft - 30;
+//         }
+//         if (i % 2 === 0) {
+//             quest.textContent = questions.question[i];
+//             answer1.textContent = questions.answer1[i];
+//             answer2.textContent = questions.answer2[i];
+//             answer3.textContent = questions.answer3[i];
+//             answer4.textContent = questions.correctAnswer[i];
+//             //eventlistener to make this true when clicked!
+//         }
+//         else {
+//             quest.textContent = questions.question[i];
+//             answer1.textContent = questions.answer1[i];
+//             answer3.textContent = questions.answer3[i];
+//             answer4.textContent = questions.correctAnswer[i];
+//             answer2.textContent = questions.answer2[i];
+//             //eventlistener to make this true when clicked!
+//             answer4.addEventListener("click", success());
+
+//         }
+
+
+//         //need to stop this from advancing until question is clicked...
+//     }
+// }
+//make "ready"
+//move this into start button events!
+
+
+// function takeQuiz() {
+//     do {
+
+// quest.textContent = questions.question[1];
+// answer1.textContent = questions.answer1[1];
+// answer2.textContent = questions.answer2[1];
+// answer3.textContent = questions.answer3[1];
+// answer4.textContent = questions.correctAnswer[1];
+// answer4.addEventListener("click", success());
+// answer3.addEventListener("click", failure());
+// answer2.addEventListener("click", failure());
+// answer1.addEventListener("click", failure());
+
+//     } while (isCorrect === false)
+// }
+//my broswer will not load this...
+
+
+
+
+
+
+
+function takeQuiz() {
+    function success() {
+        isCorrect = true;
+        i++;
+        console.log("suceed");
+        event.stopPropagation();
+    }
+    function failure() {
+        //should reduce timer
+        timeLeft = timeLeft - 30;
+        isCorrect = false;
+        console.log("fail");
+        event.stopPropagation();
+    }
+    //for loop is not working so we are skipping it...
+    var i = 0;
+    quest.textContent = questions.question[i];
+    answer1.textContent = questions.answer1[i];
+    answer2.textContent = questions.answer2[i];
+    answer3.textContent = questions.answer3[i];
+    console.log("write questions to span");
+    answer4.textContent = questions.correctAnswer[i];
+    answer4.addEventListener("click", success);
+    // answer3.addEventListener("click", failure());
+    // answer2.addEventListener("click", failure());
+    // answer1.addEventListener("click", failure());
+
+}
 //* ******************************************** */
 
 
-//could create an array with questions and cycle thru them
-//could write all divs, and them make some dissappear...
-
-//eventlistener for the first button "class start-button"
-//starts timer
-//puts put 5 p elements within #quiz
 startButton.addEventListener("click", function () {
-    // starts quiz; sets isWin to false
-    startTimer();
-    //turn #welcome invisible through display = none...
+    event.stopPropagation();
+    // starts quiz; 
 
+    //turn #welcome invisible through display = none...
+    welcomeDiv.setAttribute("style", "display:none;")
+    quizDiv.setAttribute("style", "display:block;")
+    takeQuiz();
     //turn #quiz visible
     //then start timer (120 seconds?)
-
-    console.log("test");
+    startTimer();
 
 })
 
 restartButton.addEventListener("click", function () {
     // starts quiz;
+    event.stopPropagation();
+    welcomeDiv.setAttribute("style", "display:none;")
+    welcomeDiv.setAttribute("style", "display:none;")
+    takeQuiz();
 
-
-    //sets isWin false and timeLeft to 120
-    startTimer();
 
 
     //turn #welcome invisible through display = none...
 
     //turn #quiz visible
     //then start timer (120 seconds?)
-
+    startTimer();
 
 
 })
 
 
-/* bonus ideas; add text during transitions such as "good luck" when start quiz is presses... 
+/* bonus ideas; add text during transitions such as "good luck" when start quiz is presses...
     make timer turn red at 10 seconds
 */
-//
+
+//randomize or mix up answers to questions so it is not always c = true...
