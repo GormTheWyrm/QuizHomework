@@ -18,8 +18,8 @@
    width: 600px;
    margin-top:25vh;
    /* position: absolute; */
-   /* display: none; */
-   display: block;
+   display: none;
+   /* display: block; */
 }
 
 #score-div{

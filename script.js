@@ -18,8 +18,8 @@
 
 
 var questions = {
-    question: ["What does the greater than sign look like?", "Which of the following is a valid value for a boolean variable?", 
-    "A prompt returns what sort of variable?", "What is an if-else statement is called?", "What is the value of myArray [3] if myArray = [1, 2, 4, 8, 16, 32]"],
+    question: ["What does the greater than sign look like?", "Which of the following is a valid value for a boolean variable?",
+        "A prompt returns what sort of variable?", "What is an if-else statement is called?", "What is the value of myArray [3] if myArray = [1, 2, 4, 8, 16, 32]"],
     answer1: ["+", "integers", "integer", "a party", "3"],
     answer2: ["/", "17", "boolean", "a loop", "4"],
     answer3: ["<", "The Muffin Man", "number", "an object", "6"],
@@ -44,14 +44,17 @@ var initials = document.getElementById("initials");
 var isCorrect = false;  //should be a local variable...fix later
 var locationSpan = document.getElementById("location")  //tells which question
 var addButton = document.getElementById("initial-button");   //button that adds username
-
+var showScore = document.getElementById("last-score");
+var showName = document.getElementById("last-name");
 
 var interval;
 var isWin = false;
-var timeLeft = 120;
-//120 seconds to finish
+var timeLeft = 60;
+var score = 0;
+//60 seconds to finish
 //timeLeft goes down on wrong answers
 
+//should optimize these variables- I dont need all these global variables...probably
 
 
 function startTimer() {
@@ -64,10 +67,10 @@ function startTimer() {
     finalDiv.setAttribute("style", "display:none;");
     interval = setInterval(countdown, 1000);
 
-    // *****************set time to 12 instead of 120 for testing!
+    // *****************set time to 12 for testing!
 }
 function countdown() {
-    console.log("testcountdown");
+    // console.log("testcountdown");
     timeLeft--;
     console.log(timeLeft);
     //set timerspan
@@ -82,14 +85,30 @@ function countdown() {
 
 }
 
-function loadLeaderboard(){
+function loadLeaderboard() {
+    var myScore = score;
+    localStorage.setItem("score", myScore);
+    var myName = initials.value;
+    localStorage.setItem("Initials", myName);
+    //ensure correct div is being displayed
     welcomeDiv.setAttribute("style", "display:none;");
     quizDiv.setAttribute("style", "display:none;");
     scoreDiv.setAttribute("style", "display:none;");
     finalDiv.setAttribute("style", "display:block;");
+    //read local storage
+    showScore.textContent = myScore;
+    showName.textContent = myName;
+    var myScore = score;
+    // localStorage.setItem("score", myScore);
+    //this works!
+   
+  
+   
+
+    //now pull up names and scores!
 }
 
-// JSON.stringify(“nameOfObject”,  object));
+
 
 function seeScore() {
     //transitions to score screen
@@ -98,18 +117,36 @@ function seeScore() {
     quizDiv.setAttribute("style", "display:none;");
     scoreDiv.setAttribute("style", "display:block;");
     finalDiv.setAttribute("style", "display:none;");
-    var score=0;
-    if (timeLeft < 0){
+
+    if (timeLeft < 0) {
         score = 0;
-    }else {
+    } else {
         score = timeLeft;
     }
     timeSpan.textContent = timeLeft;
     scoreSpan.textContent = score;
-    addButton.addEventListener("submit", loadLeaderboard);
+    // console.log("score"+score);
+    addButton.addEventListener("click", loadLeaderboard);
+
+
+
     //move to leaderboard once initials entered
-    loadLeaderboard();
+    //initials = input text ...
+
+
+
+
 }
+//we should probably limit use of local storage here... but how?
+
+//https://blog.logrocket.com/the-complete-guide-to-using-localstorage-in-javascript-apps-ba44edb53a36/
+// JSON.stringify(“nameOfObject”,  object));
+//JSON.parse(...)
+//var KeyName = window.localStorage.key(index);
+//loops?
+
+
+
 
 
 
@@ -122,7 +159,7 @@ function takeQuiz() {
     function success() {
         // isCorrect = true;
         i++;
-        console.log("suceed");
+        // console.log("suceed");
         event.stopPropagation();
         //I need this to call the next part of the function!
         if (i < questions.question.length) { }
@@ -139,7 +176,7 @@ function takeQuiz() {
         //should reduce timer
         timeLeft = timeLeft - 30;
         // isCorrect = false;
-        console.log("fail");
+        // console.log("fail");
         //make it say something so user does not hit again!
         //or at least highlight in red...
         event.stopPropagation();
@@ -150,9 +187,8 @@ function takeQuiz() {
         answer1.textContent = questions.answer1[i];
         answer2.textContent = questions.answer2[i];
         answer3.textContent = questions.answer3[i];
-        console.log("write questions to span");
         answer4.textContent = questions.correctAnswer[i];
-        location.textContent = toString(i);
+        // location.textContent = toString(i);
         // fix      ***
         answer4.addEventListener("click", success);
         answer3.addEventListener("click", failure);
