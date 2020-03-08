@@ -16,13 +16,13 @@
     <!--  -->
     <div class="container-lg">
         <div id="welcome" class="container-md">
-            <h1 id="test">Coding Quiz</h1>
+            <h1 id="test">Javascript Quiz</h1>
             <p>Welcome to my Javascript Coding Quiz</p>
             <button id="start-button" type="button" class="btn btn-info">Start Quiz</button>
         </div>
 
         <div id="quiz" class="container-md">
-            <h1>Test Question 1</h1>
+            <h1>JavaScript Quiz <span id=location></span></h1>
             <span> Time Left </span>
             <span id="timer-span"></span>
             <span> Seconds</span>
@@ -38,8 +38,12 @@
         <div id="score-div" class="contianer-md">
             <!-- will display score -->
             <h1>Congratulations!</h1>
-            <span>You scored</span>
+            <span>Your time remaining was </span>
+            <span id="time-span"></span>
+            <br>
+            <span>You scored </span>
             <span id="score-span"></span>
+            <p>Type your initials to record your score</p>
             <input type="text" id="initals">
  
 

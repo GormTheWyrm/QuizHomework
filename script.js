@@ -12,7 +12,8 @@
 // THEN I can save my initials and score
 // ```
 
-
+//maybe make score an array to store all of the past stores?
+//would have to generate spans to show these via an array...
 
 
 
@@ -37,8 +38,10 @@ var startButton = document.getElementById("start-button");
 var restartButton = document.getElementById("restart-button");
 var timerSpan = document.getElementById("timer-span");
 var scoreSpan = document.getElementById("score-span");
+var timeSpan = document.getElementById("time-span");
 var initials = document.getElementById("initials");
 var isCorrect = false;  //should be a local variable...fix later
+var locationSpan = document.getElementById("location")  //tells which question
 
 
 var interval;
@@ -47,13 +50,18 @@ var timeLeft = 120;
 //120 seconds to finish
 //timeLeft goes down on wrong answers
 
-// var score = 0;
-//score should be timeleft...
-//this can be local
 
-function setTimer() {
+
+function startTimer() {
+    //sets timer and hides all but quiz div
     timeLeft = 12;
     isWin = false;
+    welcomeDiv.setAttribute("style", "display:none;");
+    quizDiv.setAttribute("style", "display:block;");
+    scoreDiv.setAttribute("style", "display:none;");
+    finalDiv.setAttribute("style", "display:none;");
+    interval = setInterval(countdown, 1000);
+
     // *****************set time to 12 instead of 120 for testing!
 }
 function countdown() {
@@ -72,76 +80,25 @@ function countdown() {
 
 }
 
-function startTimer() {
-    setTimer();
-    interval = setInterval(countdown, 1000);
 
 
+function seeScore() {
+    //transitions to score screen
+    //can be called by timer or by reaching end of quiz
+    welcomeDiv.setAttribute("style", "display:none;");
+    quizDiv.setAttribute("style", "display:none;");
+    scoreDiv.setAttribute("style", "display:block;");
+    finalDiv.setAttribute("style", "display:none;");
+    var score=0;
+    if (timeLeft < 0){
+        score = 0;
+    }else {
+        score = timeLeft;
+    }
+    timeSpan.textContent = timeLeft;
+    scoreSpan.textContent = score;
+    //move to leaderboard once initials entered
 }
-
-
-//need to pull up quiz components (before starting timer)
-//
-//need to figure out transitions...
-//xxx = questions.question
-//xxx.textContent= questions.option1
-
-// function takeQuiz() {
-//     var isCorrect = false;
-//     for (i = 0; i < questions.question.length;) {
-//         //move up when correct answer clicked...
-//         function success() {
-//             isCorrect = true;
-//             i++;
-//         }
-//         function failure() {
-//             //should reduce timer
-//             timeLeft = timeLeft - 30;
-//         }
-//         if (i % 2 === 0) {
-//             quest.textContent = questions.question[i];
-//             answer1.textContent = questions.answer1[i];
-//             answer2.textContent = questions.answer2[i];
-//             answer3.textContent = questions.answer3[i];
-//             answer4.textContent = questions.correctAnswer[i];
-//             //eventlistener to make this true when clicked!
-//             answer4.addEventListener("click", success);
-//         }
-//         else {
-//             quest.textContent = questions.question[i];
-//             answer1.textContent = questions.answer1[i];
-//             answer4.textContent = questions.answer2[i];
-//             answer3.textContent = questions.answer3[i];
-//             answer2.textContent = questions.correctAnswer[i];
-//             //eventlistener to make this true when clicked!
-//             answer4.addEventListener("click", success);
-
-//         }
-
-
-//         //need to stop this from advancing until question is clicked...
-//     }
-// }
-// make "ready"
-// move this into start button events!
-
-
-// function takeQuiz() {
-//     do {
-
-// quest.textContent = questions.question[1];
-// answer1.textContent = questions.answer1[1];
-// answer2.textContent = questions.answer2[1];
-// answer3.textContent = questions.answer3[1];
-// answer4.textContent = questions.correctAnswer[1];
-// answer4.addEventListener("click", success());
-// answer3.addEventListener("click", failure());
-// answer2.addEventListener("click", failure());
-// answer1.addEventListener("click", failure());
-
-//     } while (isCorrect === false)
-// }
-//my broswer will not load this...
 
 
 
@@ -159,6 +116,12 @@ function takeQuiz() {
         //I need this to call the next part of the function!
         if (i < questions.question.length) { }
         doQuestion();
+        if (i === questions.question.length) {
+            isWin = true;
+            // alert("youwin");
+            //TRANSITION TO SCORE
+            seeScore();
+        }
     }
 
     function failure() {
@@ -178,11 +141,14 @@ function takeQuiz() {
         answer3.textContent = questions.answer3[i];
         console.log("write questions to span");
         answer4.textContent = questions.correctAnswer[i];
+        location.textContent = toString(i);
+        // fix      ***
         answer4.addEventListener("click", success);
         answer3.addEventListener("click", failure);
         answer2.addEventListener("click", failure);
         answer1.addEventListener("click", failure);
         //currently the correct answer is in same place
+
     }
     //takeQuiz actual orders;
     doQuestion();
@@ -199,20 +165,19 @@ startButton.addEventListener("click", function () {
     // starts quiz; 
 
     //turn #welcome invisible through display = none...
-    welcomeDiv.setAttribute("style", "display:none;")
-    quizDiv.setAttribute("style", "display:block;")
+    startTimer();       //now sets all but quiz to display:none
     takeQuiz();
     //turn #quiz visible
     //then start timer (120 seconds?)
-    startTimer();
+
 
 })
 
 restartButton.addEventListener("click", function () {
     // starts quiz;
     event.stopPropagation();
-    welcomeDiv.setAttribute("style", "display:none;")
-    welcomeDiv.setAttribute("style", "display:none;")
+    welcomeDiv.setAttribute("style", "display:none;");
+    welcomeDiv.setAttribute("style", "display:none;");
     takeQuiz();
 
 
