@@ -94,7 +94,7 @@ function loadLeaderboard() {
     //read local storage
     showScore.textContent = myScore;
     showName.textContent = myName;
-    var myScore = score;
+   
     // localStorage.setItem("score", myScore);
     //this works!
    
